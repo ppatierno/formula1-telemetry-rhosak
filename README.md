@@ -67,7 +67,6 @@ Create the topics needed by the application.
 rhoas kafka topic create --name f1-telemetry-drivers
 rhoas kafka topic create --name f1-telemetry-events
 rhoas kafka topic create --name f1-telemetry-packets
-rhoas kafka topic create --name f1-telemetry-events
 rhoas kafka topic create --name f1-telemetry-drivers-avg-speed
 rhoas kafka topic create --name f1-telemetry-drivers-laps
 ```
