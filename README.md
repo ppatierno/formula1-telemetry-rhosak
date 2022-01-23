@@ -89,3 +89,42 @@ f1-telemetry-drivers-laps                 1   604800000             -1 (Unlimite
 f1-telemetry-events                       1   604800000             -1 (Unlimited)          
 f1-telemetry-packets                      1   604800000             -1 (Unlimited)
 ```
+
+## Create service accounts and ACLs
+
+### UDP to Apache Kafka
+
+Create a service account for the UDP to Apache Kafka application by running the following command.
+
+```shell
+rhoas service-account create --short-description formaula1-udp-kafka --file-format json --output-file ./formula1-udp-kafka.json
+```
+
+This will generate a JSON file containing the credentials for accessing the Kafka instance.
+
+```shell
+{ 
+	"clientID":"srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf", 
+	"clientSecret":"f8g93220-9619-55ed-c23d-a2356c1fds9c",
+	"oauthTokenUrl":"https://identity.api.openshift.com/auth/realms/rhoas/protocol/openid-connect/token"
+}
+```
+
+The UDP to Apache Kafka application needs the rights to write on the `f1-telemetry-drivers`, `f1-telemetry-events` and `f1-telemetry-packets` topics.
+To simplify let's grent access as a producer on topics starting with `f1-` prefix.
+
+```shell
+rhoas kafka acl grant-access --producer --service-account srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf --topic-prefix f1-
+```
+
+In this way the following ACLs entries will be created for the corresponding service account.
+
+```shell
+PRINCIPAL (5)                                    PERMISSION   OPERATION   DESCRIPTION              
+------------------------------------------------ ------------ ----------- ------------------------- 
+srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        describe    topic starts with "f1-"  
+srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        write       topic starts with "f1-"  
+srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        create      topic starts with "f1-"  
+srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        write       transactional-id is "*"  
+srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        describe    transactional-id is "*" 
+```
