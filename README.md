@@ -58,3 +58,35 @@ Name:                   formula1-kafka
 Status:                 ready
 Bootstrap URL:          formula-j-d-nks-g-f-pqm---fmvg.bf2.kafka.rhcloud.com:443
 ```
+
+## Create topics
+
+Create the topics needed by the application.
+
+```shell
+rhoas kafka topic create --name f1-telemetry-drivers
+rhoas kafka topic create --name f1-telemetry-events
+rhoas kafka topic create --name f1-telemetry-packets
+rhoas kafka topic create --name f1-telemetry-events
+rhoas kafka topic create --name f1-telemetry-drivers-avg-speed
+rhoas kafka topic create --name f1-telemetry-drivers-laps
+```
+
+Each command will print the topic configuration.
+Check that all topics are created  by running the following command.
+
+```shell
+rhoas kafka topic list
+```
+
+The output will show the list of the topics on the Kafka instance.
+
+```shell
+NAME (5)                         PARTITIONS   RETENTION TIME (MS)   RETENTION SIZE (BYTES)  
+-------------------------------- ------------ --------------------- ------------------------ 
+f1-telemetry-drivers                      1   604800000             -1 (Unlimited)          
+f1-telemetry-drivers-avg-speed            1   604800000             -1 (Unlimited)          
+f1-telemetry-drivers-laps                 1   604800000             -1 (Unlimited)          
+f1-telemetry-events                       1   604800000             -1 (Unlimited)          
+f1-telemetry-packets                      1   604800000             -1 (Unlimited)
+```
