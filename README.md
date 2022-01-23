@@ -42,4 +42,19 @@ The command will exit when the instance is ready providing some related informat
 }
 ```
 
+To confirm that everything is fine, verify the status of the Kafka instance by running the following command:
 
+```shell
+rhoas status kafka
+```
+
+The output will show status and bootstrap URL of the Kafka instance.
+
+```shell
+Kafka
+--------------------------------------------------------------------------------
+ID:                     c8nkp5i1e9ohm495fnvd
+Name:                   formula1-kafka
+Status:                 ready
+Bootstrap URL:          formula-j-d-nks-g-f-pqm---fmvg.bf2.kafka.rhcloud.com:443
+```
