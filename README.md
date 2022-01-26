@@ -120,11 +120,46 @@ rhoas kafka acl grant-access --producer --service-account srvc-acct-adg23480-dsd
 In this way the following ACLs entries will be created for the corresponding service account.
 
 ```shell
-PRINCIPAL (5)                                    PERMISSION   OPERATION   DESCRIPTION              
+PRINCIPAL                                        PERMISSION   OPERATION   DESCRIPTION              
 ------------------------------------------------ ------------ ----------- ------------------------- 
 srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        describe    topic starts with "f1-"  
 srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        write       topic starts with "f1-"  
 srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        create      topic starts with "f1-"  
 srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        write       transactional-id is "*"  
 srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        describe    transactional-id is "*" 
+```
+
+### Apache Kafka to InfluxDB
+
+Create a service account for the Apache Kafka to InfluxDB application by running the following command.
+
+```shell
+rhoas service-account create --short-description formaula1-kafka-influxdb --file-format json --output-file ./formaula1-kafka-influxdb.json
+```
+
+This will generate a JSON file containing the credentials for accessing the Kafka instance.
+
+```shell
+{ 
+	"clientID":"srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsf", 
+	"clientSecret":"g6d12345-9619-55ed-c23d-a2356c1fds9c",
+	"oauthTokenUrl":"https://identity.api.openshift.com/auth/realms/rhoas/protocol/openid-connect/token"
+}
+```
+
+The Apache Kafka to InfluxDB application needs the rights to read from the `f1-telemetry-drivers`, `f1-telemetry-events` and `f1-telemetry-drivers-avg-speed` topics.
+To simplify let's grent access as a consumer on topics starting with `f1-` prefix.
+
+```shell
+rhoas kafka acl grant-access --consumer --service-account srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsf --topic-prefix f1- --group all
+```
+
+In this way the following ACLs entries will be created for the corresponding service account.
+
+```shell
+PRINCIPAL                                        PERMISSION   OPERATION   DESCRIPTION              
+------------------------------------------------ ------------ ----------- ------------------------- 
+srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsfa   allow        describe    topic starts with "f1-"  
+srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsfa   allow        read        topic starts with "f1-"  
+srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsfa   allow        read        group is "*"
 ```
