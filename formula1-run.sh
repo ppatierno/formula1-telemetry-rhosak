@@ -7,11 +7,11 @@
 # to generate via the rhoas service-account create --short-description formaula1-udp-kafka --file-format env --output-file ./formula1-udp-kafka.env
 source $1
 
-KAFKA_TLS_ENABLED=true
-KAFKA_BOOTSTRAP_SERVERS=$2
-KAFKA_SASL_MECHANISM=PLAIN
-KAFKA_SASL_USERNAME=${RHOAS_SERVICE_ACCOUNT_CLIENT_ID}
-KAFKA_SASL_PASSWORD=${RHOAS_SERVICE_ACCOUNT_CLIENT_SECRET}
+export KAFKA_TLS_ENABLED=true
+export KAFKA_BOOTSTRAP_SERVERS=$2
+export KAFKA_SASL_MECHANISM=PLAIN
+export KAFKA_SASL_USERNAME=${RHOAS_SERVICE_ACCOUNT_CLIENT_ID}
+export KAFKA_SASL_PASSWORD=${RHOAS_SERVICE_ACCOUNT_CLIENT_SECRET}
 
 echo "Formula1 script configuration:"
 echo "- KAFKA_TLS_ENABLED=${KAFKA_TLS_ENABLED}"
