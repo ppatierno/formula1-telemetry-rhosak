@@ -170,8 +170,10 @@ srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsfa   allow        read        group 
 Start the UDP to Apache Kafka application by running the following command.
 
 ```shell
-RHOSAK_BOOTSTRAP_SERVER_HOST=$(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host)
-./formula1-run.sh ./formula1-udp-kafka.env ${RHOSAK_BOOTSTRAP_SERVER_HOST} <PATH_TO_JAR>
+./formula1-run.sh \
+./formula1-udp-kafka.env \
+$(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host) \
+<PATH_TO_JAR>
 ```
 
 The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/github/formula1-telemetry-kafka/udp-kafka/target/f1-telemetry-udp-kafka-1.0-SNAPSHOT-jar-with-dependencies.jar`)
@@ -181,8 +183,10 @@ The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/git
 Start the Apache Kafka to InfluxDB application by running the following command.
 
 ```shell
-RHOSAK_BOOTSTRAP_SERVER_HOST=$(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host)
-./formula1-run.sh ./formula1-kafka-influxdb.env ${RHOSAK_BOOTSTRAP_SERVER_HOST} <PATH_TO_JAR>
+./formula1-run.sh \
+./formula1-kafka-influxdb.env \
+$(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host) \
+<PATH_TO_JAR>
 ```
 
 The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/github/formula1-telemetry-kafka/kafka-influxdb/target/f1-telemetry-kafka-influxdb-1.0-SNAPSHOT-jar-with-dependencies.jar`)
