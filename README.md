@@ -9,6 +9,7 @@ This repository describes the way to deploy the [Formula 1 - Telemetry with Apac
  * Having an account on [Red Hat Hybrid Cloud](https://cloud.redhat.com/).
  * Having the `rhoas` CLI tool installed by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#installing-the-rhoas-cli).
  * Logging into your own Red Hat Hybrid Cloud account via `rhoas login` command by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#logging-in-to-rhoas).
+ * [jq](https://github.com/stedolan/jq) tool 
 
 ## Create Apache Kafka instance
 
@@ -161,3 +162,27 @@ srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsfa   allow        describe    topic 
 srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsfa   allow        read        topic starts with "f1-"  
 srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsfa   allow        read        group is "*"
 ```
+
+## Running Formula1 applications
+
+### UDP to Apache Kafka
+
+Start the UDP to Apache Kafka application by running the following command.
+
+```shell
+RHOSAK_BOOTSTRAP_SERVER_HOST=$(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host)
+./formula1-run.sh ./formula1-udp-kafka.env ${RHOSAK_BOOTSTRAP_SERVER_HOST} <PATH_TO_JAR>
+```
+
+The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/github/formula1-telemetry-kafka/udp-kafka/target/f1-telemetry-udp-kafka-1.0-SNAPSHOT-jar-with-dependencies.jar`)
+
+### Apache Kafka to InfluxDB
+
+Start the Apache Kafka to InfluxDB application by running the following command.
+
+```shell
+RHOSAK_BOOTSTRAP_SERVER_HOST=$(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host)
+./formula1-run.sh ./formula1-kafka-influxdb.env ${RHOSAK_BOOTSTRAP_SERVER_HOST} <PATH_TO_JAR>
+```
+
+The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/github/formula1-telemetry-kafka/kafka-influxdb/target/f1-telemetry-kafka-influxdb-1.0-SNAPSHOT-jar-with-dependencies.jar`)
