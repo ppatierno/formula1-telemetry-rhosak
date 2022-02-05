@@ -242,3 +242,17 @@ $(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host) \
 ```
 
 The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/github/formula1-telemetry-kafka/streams-avg-speed/target/f1-telemetry-streams-avg-speed-1.0-SNAPSHOT-jar-with-dependencies.jar`)
+
+## Cleaning
+
+In order to clean the deployment, you can run the following script to delete the service accounts.
+
+```shell
+./clean_service_accounts.sh
+```
+
+Then finally delete the Apache Kafka instance.
+
+```shell
+rhoas kafka delete --name formula1-kafka
+```
