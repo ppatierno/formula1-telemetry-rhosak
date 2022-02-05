@@ -229,3 +229,16 @@ $(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host) \
 ```
 
 The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/github/formula1-telemetry-kafka/kafka-influxdb/target/f1-telemetry-kafka-influxdb-1.0-SNAPSHOT-jar-with-dependencies.jar`)
+
+### Apache Kafka Streams
+
+Start one of the Apache Kafka Streams based applications by running the following command.
+
+```shell
+./formula1-run.sh \
+./formula1-kafka-streams.env \
+$(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host) \
+<PATH_TO_JAR>
+```
+
+The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/github/formula1-telemetry-kafka/streams-avg-speed/target/f1-telemetry-streams-avg-speed-1.0-SNAPSHOT-jar-with-dependencies.jar`)
