@@ -114,7 +114,7 @@ The UDP to Apache Kafka application needs the rights to write on the `f1-telemet
 To simplify let's grent access as a producer on topics starting with `f1-` prefix.
 
 ```shell
-rhoas kafka acl grant-access --producer --service-account srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf --topic-prefix f1-
+rhoas kafka acl grant-access -y --producer --service-account srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf --topic-prefix f1-
 ```
 
 In this way the following ACLs entries will be created for the corresponding service account.
@@ -150,7 +150,7 @@ The Apache Kafka to InfluxDB application needs the rights to read from the `f1-t
 To simplify let's grent access as a consumer on topics starting with `f1-` prefix.
 
 ```shell
-rhoas kafka acl grant-access --consumer --service-account srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsf --topic-prefix f1- --group all
+rhoas kafka acl grant-access -y --consumer --service-account srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsf --topic-prefix f1- --group all
 ```
 
 In this way the following ACLs entries will be created for the corresponding service account.
@@ -185,7 +185,7 @@ The Apache Kafka Streams applications need the rights to read from and write to 
 To simplify let's grent access as a producer and consumer on topics starting with `f1-` prefix.
 
 ```shell
-rhoas kafka acl grant-access --producer --consumer --service-account srvc-acct-93a071fc-7709-43ad-b0bd-431ce4f640ae --topic-prefix f1- --group all
+rhoas kafka acl grant-access -y --producer --consumer --service-account srvc-acct-93a071fc-7709-43ad-b0bd-431ce4f640ae --topic-prefix f1- --group all
 ```
 
 In this way the following ACLs entries will be created for the corresponding service account.
@@ -254,5 +254,5 @@ In order to clean the deployment, you can run the following script to delete the
 Then finally delete the Apache Kafka instance.
 
 ```shell
-rhoas kafka delete --name formula1-kafka
+rhoas kafka delete -y --name formula1-kafka
 ```
