@@ -19,7 +19,7 @@ Create the Apache Kafka instance by running the following command:
 rhoas kafka create --name formula1-kafka --wait
 ```
 
-It specifis the `--name` option with the name of the instance and instructs the command to run synchronously by waiting for the instance to be ready using the `--wait` option.
+It specifies the `--name` option with the name of the instance and instructs the command to run synchronously by waiting for the instance to be ready using the `--wait` option.
 The command will exit when the instance is ready providing some related information in JSON format like following.
 
 ```shell
@@ -62,14 +62,11 @@ Bootstrap URL:          formula-j-d-nks-g-f-pqm---fmvg.bf2.kafka.rhcloud.com:443
 
 ## Create topics
 
-Create the topics needed by the application.
+The Formula 1 project relies on some topics for storying and analyzing the telemetry data.
+They can be customized via environment variables across the different applications but by running the following script you can create them with the default names.
 
 ```shell
-rhoas kafka topic create --name f1-telemetry-drivers
-rhoas kafka topic create --name f1-telemetry-events
-rhoas kafka topic create --name f1-telemetry-packets
-rhoas kafka topic create --name f1-telemetry-drivers-avg-speed
-rhoas kafka topic create --name f1-telemetry-drivers-laps
+./create-topics.sh
 ```
 
 Each command will print the topic configuration.
@@ -248,7 +245,13 @@ The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/git
 In order to clean the deployment, you can run the following script to delete the service accounts.
 
 ```shell
-./clean_service_accounts.sh
+./delete-service-accounts.sh
+```
+
+Next step deleting the topics.
+
+```shell
+./delete-topics.sh
 ```
 
 Then finally delete the Apache Kafka instance.
