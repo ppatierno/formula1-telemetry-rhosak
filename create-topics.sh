@@ -4,5 +4,5 @@ f1Topics=("f1-telemetry-drivers" "f1-telemetry-events" "f1-telemetry-packets" "f
 
 for topic in ${f1Topics[@]}; do
     echo "Creating topic $topic"
-    rhoas kafka topic create --name $topic
+    rhoas kafka topic create --name $topic 1> /dev/null
 done
