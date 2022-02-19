@@ -111,7 +111,8 @@ The UDP to Apache Kafka application needs the rights to write on the `f1-telemet
 To simplify let's grent access as a producer on topics starting with `f1-` prefix.
 
 ```shell
-rhoas kafka acl grant-access -y --producer --service-account srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf --topic-prefix f1-
+source ./formula1-udp-kafka.env
+rhoas kafka acl grant-access -y --producer --service-account $RHOAS_SERVICE_ACCOUNT_CLIENT_ID --topic-prefix f1-
 ```
 
 In this way the following ACLs entries will be created for the corresponding service account.
@@ -131,7 +132,7 @@ srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        describe    transa
 Create a service account for the Apache Kafka to InfluxDB application by running the following command.
 
 ```shell
-rhoas service-account create --short-description formaula1-kafka-influxdb --file-format env --output-file ./formaula1-kafka-influxdb.env
+rhoas service-account create --short-description formaula1-kafka-influxdb --file-format env --output-file ./formula1-kafka-influxdb.env
 ```
 
 This will generate a file containing the credentials for accessing the Kafka instance as environment variables.
@@ -147,7 +148,8 @@ The Apache Kafka to InfluxDB application needs the rights to read from the `f1-t
 To simplify let's grent access as a consumer on topics starting with `f1-` prefix.
 
 ```shell
-rhoas kafka acl grant-access -y --consumer --service-account srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsf --topic-prefix f1- --group all
+source ./formula1-kafka-influxdb.env
+rhoas kafka acl grant-access -y --consumer --service-account $RHOAS_SERVICE_ACCOUNT_CLIENT_ID --topic-prefix f1- --group all
 ```
 
 In this way the following ACLs entries will be created for the corresponding service account.
@@ -182,7 +184,8 @@ The Apache Kafka Streams applications need the rights to read from and write to 
 To simplify let's grent access as a producer and consumer on topics starting with `f1-` prefix.
 
 ```shell
-rhoas kafka acl grant-access -y --producer --consumer --service-account srvc-acct-93a071fc-7709-43ad-b0bd-431ce4f640ae --topic-prefix f1- --group all
+source ./formula1-kafka-streams.env
+rhoas kafka acl grant-access -y --producer --consumer --service-account $RHOAS_SERVICE_ACCOUNT_CLIENT_ID --topic-prefix f1- --group all
 ```
 
 In this way the following ACLs entries will be created for the corresponding service account.
@@ -232,6 +235,7 @@ The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/git
 Start one of the Apache Kafka Streams based applications by running the following command.
 
 ```shell
+export F1_STREAMS_INTERNAL_REPLICATION_FACTOR=3
 ./formula1-run.sh \
 ./formula1-kafka-streams.env \
 $(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host) \
