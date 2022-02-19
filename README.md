@@ -7,7 +7,7 @@ This repository describes the way to deploy the [Formula 1 - Telemetry with Apac
  The main pre-requisites are:
 
  * Having an account on [Red Hat Hybrid Cloud](https://cloud.redhat.com/).
- * Having the `rhoas` CLI tool installed by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#installing-the-rhoas-cli).
+ * Having the `rhoas` CLI tool (at least 0.38.6) installed by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#installing-the-rhoas-cli).
  * Logging into your own Red Hat Hybrid Cloud account via `rhoas login` command by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#logging-in-to-rhoas).
  * [jq](https://github.com/stedolan/jq) tool 
 
