@@ -244,6 +244,21 @@ $(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host) \
 
 The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/github/formula1-telemetry-kafka/streams-avg-speed/target/f1-telemetry-streams-avg-speed-1.0-SNAPSHOT-jar-with-dependencies.jar`)
 
+#### Quarkus
+
+The Quarkus based Apache Kafka Streams application uses a different set of configuration parameters and can be started by running the following command.
+
+```shell
+source ./formula1-kafka-streams.env
+export KAFKA_BOOTSTRAP_SERVERS=$(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host)
+export QUARKUS_KAFKA_STREAMS_SASL_MECHANISM=PLAIN
+export QUARKUS_KAFKA_STREAMS_SECURITY_PROTOCOL=SASL_SSL
+export QUARKUS_KAFKA_STREAMS_SASL_JAAS_CONFIG="org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${RHOAS_SERVICE_ACCOUNT_CLIENT_ID}\" password=\"${RHOAS_SERVICE_ACCOUNT_CLIENT_SECRET}\";"
+java -jar <PATH_TO_JAR>
+```
+
+The `<PATH_TO_JAR>` is the path to the `quarkus-run.jar` (i.e. `/home/ppatiern/github/formula1-telemetry-kafka/quarkus-streams-avg-speed/target/quarkus-app/quarkus-run.jar`)
+
 ## Cleaning
 
 In order to clean the deployment, you can run the following script to delete the service accounts.
