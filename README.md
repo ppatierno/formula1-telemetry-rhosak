@@ -2,6 +2,8 @@
 
 This repository describes the way to deploy the [Formula 1 - Telemetry with Apache Kafka](https://github.com/ppatierno/formula1-telemetry-kafka) on a managed Kafka instance provided via the [Red Hat OpenShift Streams for Apache Kafka service](https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-streams-for-apache-kafka).
 
+![Overview](./images/f1-telemetry-overview.png)
+
  ## Prerequisites
 
  The main pre-requisites are:
