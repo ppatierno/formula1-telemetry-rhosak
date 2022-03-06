@@ -1,6 +1,6 @@
 # Formula 1 telemetry on Red Hat OpenShift Streams for Apache Kafka
 
-This repository describes the way to deploy the [Formula 1 - Telemetry with Apache Kafka](https://github.com/ppatierno/formula1-telemetry-kafka) on a managed Kafka instance provided via the [Red Hat OpenShift Streams for Apache Kafka service](https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-streams-for-apache-kafka).
+This repository provides a guide to deploy the [Formula 1 - Telemetry with Apache Kafka](https://github.com/ppatierno/formula1-telemetry-kafka) project on a fully managed Kafka instance from the [Red Hat OpenShift Streams for Apache Kafka](https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-streams-for-apache-kafka) service.
 
 ![Overview](./images/f1-telemetry-overview.png)
 
@@ -11,11 +11,11 @@ This repository describes the way to deploy the [Formula 1 - Telemetry with Apac
  * Having an account on [Red Hat Hybrid Cloud](https://cloud.redhat.com/).
  * Having the `rhoas` CLI tool (at least 0.38.6) installed by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#installing-the-rhoas-cli).
  * Logging into your own Red Hat Hybrid Cloud account via `rhoas login` command by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#logging-in-to-rhoas).
- * [jq](https://github.com/stedolan/jq) tool 
+ * [jq](https://github.com/stedolan/jq) tool.
 
 ## Create Apache Kafka instance
 
-Create the Apache Kafka instance by running the following command:
+Create the Apache Kafka instance by running the following command.
 
 ```shell
 rhoas kafka create --name formula1-kafka --wait
@@ -45,7 +45,7 @@ The command will exit when the instance is ready providing some related informat
 }
 ```
 
-To confirm that everything is fine, verify the status of the Kafka instance by running the following command:
+To confirm that everything is fine, verify the status of the Kafka instance by running the following command.
 
 ```shell
 rhoas status kafka
@@ -64,7 +64,7 @@ Bootstrap URL:          formula-j-d-nks-g-f-pqm---fmvg.bf2.kafka.rhcloud.com:443
 
 ## Create topics
 
-The Formula 1 project relies on some topics for storying and analyzing the telemetry data.
+The Formula 1 project relies on some topics for storing and analyzing the telemetry data.
 They can be customized via environment variables across the different applications but by running the following script you can create them with the default names.
 
 ```shell
@@ -72,7 +72,7 @@ They can be customized via environment variables across the different applicatio
 ```
 
 Each command will print the topic configuration.
-Check that all topics are created  by running the following command.
+Check that all topics are created by running the following command.
 
 ```shell
 rhoas kafka topic list
