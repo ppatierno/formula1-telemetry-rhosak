@@ -263,7 +263,7 @@ The `<PATH_TO_JAR>` is the path to the `quarkus-run.jar` (i.e. `/home/ppatiern/g
 
 ## Cleaning
 
-In order to clean the deployment, you can run the following script to delete the service accounts.
+In order to clean the deployment, you can run the following script to delete the service accounts and the local env files.
 
 ```shell
 ./delete-service-accounts.sh
