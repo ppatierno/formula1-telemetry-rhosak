@@ -134,7 +134,7 @@ srvc-acct-adg23480-dsdf-244a-gt65-d4vd65784dsf   allow        describe    transa
 Create a service account for the Apache Kafka to InfluxDB application by running the following command.
 
 ```shell
-rhoas service-account create --short-description formaula1-kafka-influxdb --file-format env --output-file ./formula1-kafka-influxdb.env
+rhoas service-account create --short-description formula1-kafka-influxdb --file-format env --output-file ./formula1-kafka-influxdb.env
 ```
 
 This will generate a file containing the credentials for accessing the Kafka instance as environment variables.
@@ -169,7 +169,7 @@ srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsfa   allow        read        group 
 Create a service account for the Apache Kafka Straems applications by running the following command.
 
 ```shell
-rhoas service-account create --short-description formaula1-kafka-streams --file-format env --output-file ./formula1-kafka-streams.env
+rhoas service-account create --short-description formula1-kafka-streams --file-format env --output-file ./formula1-kafka-streams.env
 ```
 
 This will generate a file containing the credentials for accessing the Kafka instance as environment variables.
