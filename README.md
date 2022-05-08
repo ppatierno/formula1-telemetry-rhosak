@@ -9,7 +9,7 @@ This repository provides a guide to deploy the [Formula 1 - Telemetry with Apach
  The main pre-requisites are:
 
  * Having an account on [Red Hat Hybrid Cloud](https://cloud.redhat.com/).
- * Having the `rhoas` CLI tool (at least 0.38.6) installed by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#installing-the-rhoas-cli).
+ * Having the `rhoas` CLI tool installed by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#installing-the-rhoas-cli).
  * Logging into your own Red Hat Hybrid Cloud account via `rhoas login` command by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#logging-in-to-rhoas).
  * [jq](https://github.com/stedolan/jq) tool.
 
@@ -27,21 +27,22 @@ The command will exit when the instance is ready providing some related informat
 ```shell
 ✔️  Kafka instance "formula1-kafka" has been created:
 {
-  "bootstrap_server_host": "formula-j-d-nks-g-f-pqm---fmvg.bf2.kafka.rhcloud.com:443",
+  "bootstrap_server_host": "formula-k-c-rountr-f----l-fp-g.bf2.kafka.rhcloud.com:443",
   "cloud_provider": "aws",
-  "created_at": "2022-01-23T11:35:47.142502Z",
-  "href": "/api/kafkas_mgmt/v1/kafkas/c8nkp5i1e9ohm495fnvd",
-  "id": "c8nkp5i1e9ohm495fnvd",
-  "instance_type": "eval",
+  "created_at": "2022-05-08T09:37:36.095647Z",
+  "href": "/api/kafkas_mgmt/v1/kafkas/c9rountr8f0102l1fp6g",
+  "id": "c9rountr8f0102l1fp6g",
+  "instance_type": "developer",
+  "kafka_storage_size": "10Gi",
   "kind": "Kafka",
-  "multi_az": true,
+  "multi_az": false,
   "name": "formula1-kafka",
   "owner": "ppatiern",
   "reauthentication_enabled": true,
   "region": "us-east-1",
   "status": "ready",
-  "updated_at": "2022-01-23T11:40:24.253791Z",
-  "version": "2.8.1"
+  "updated_at": "2022-05-08T09:42:17.916266Z",
+  "version": "3.0.1"
 }
 ```
 
@@ -56,10 +57,10 @@ The output will show status and bootstrap URL of the Kafka instance.
 ```shell
 Kafka
 --------------------------------------------------------------------------------
-ID:                     c8nkp5i1e9ohm495fnvd
+ID:                     c9rountr8f0102l1fp6g
 Name:                   formula1-kafka
 Status:                 ready
-Bootstrap URL:          formula-j-d-nks-g-f-pqm---fmvg.bf2.kafka.rhcloud.com:443
+Bootstrap URL:          formula-k-c-rountr-f----l-fp-g.bf2.kafka.rhcloud.com:443
 ```
 
 ## Create topics
@@ -237,7 +238,7 @@ The `<PATH_TO_JAR>` is the path to the application JAR (i.e. `/home/ppatiern/git
 Start one of the Apache Kafka Streams based applications by running the following command.
 
 ```shell
-export F1_STREAMS_INTERNAL_REPLICATION_FACTOR=3
+export F1_STREAMS_INTERNAL_REPLICATION_FACTOR=-1
 ./formula1-run.sh \
 ./formula1-kafka-streams.env \
 $(rhoas kafka describe --name formula1-kafka | jq -r .bootstrap_server_host) \
