@@ -10,6 +10,8 @@ This repository provides a guide to deploy the [Formula 1 - Telemetry with Apach
 
  * Having an account on [Red Hat Hybrid Cloud](https://cloud.redhat.com/).
  * Having the `rhoas` CLI tool installed by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#installing-the-rhoas-cli).
+ * Having [formula1-telemetry](https://github.com/ppatierno/formula1-telemetry) as a library in the local Maven repository.
+ * Clone [formula1-telemetry-kafka](https://github.com/ppatierno/formula1-telemetry-kafka) to generate JARs for formula1 applications.
  * Logging into your own Red Hat Hybrid Cloud account via `rhoas login` command by following instructions [here](https://github.com/redhat-developer/app-services-guides/tree/main/rhoas-cli#logging-in-to-rhoas).
  * [jq](https://github.com/stedolan/jq) tool.
 
@@ -167,7 +169,7 @@ srvc-acct-abc1234-dsdf-244a-gt65-d4vd65784dsfa   allow        read        group 
 
 ### Apache Kafka Streams
 
-Create a service account for the Apache Kafka Straems applications by running the following command.
+Create a service account for the Apache Kafka Streams applications by running the following command.
 
 ```shell
 rhoas service-account create --short-description formula1-kafka-streams --file-format env --output-file ./formula1-kafka-streams.env
