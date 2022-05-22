@@ -2,6 +2,8 @@
 
 This repository provides a guide to deploy the [Formula 1 - Telemetry with Apache Kafka](https://github.com/ppatierno/formula1-telemetry-kafka) project on a fully managed Kafka instance from the [Red Hat OpenShift Streams for Apache Kafka](https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-streams-for-apache-kafka) service.
 
+You can even get more information by watching the ["Formula 1 telemetry processing using Quarkus and OpenShift Streams for Apache Kafka"](https://events.experiences.redhat.com/widget/redhat/sum22/SessionCatalog22/session/1641400967915001tsYD) session at Red Hat Summit 2022 with slides available [here](https://www.slideshare.net/paolopat/formula-1-telemetry-processing-using-quarkus-and-openshift-streams-for-apache-kafka) and reading the corresponding [article](https://developers.redhat.com/articles/2022/04/28/process-formula-1-telemetry-quarkus-and-openshift-streams-apache-kafka) on the Red Hat Developer official website.
+
 ![Overview](./images/f1-telemetry-overview.png)
 
  ## Prerequisites
